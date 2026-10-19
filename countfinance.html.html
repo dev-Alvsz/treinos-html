@@ -1,0 +1,1517 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountFinance | Gestão Financeira</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: #F9FAFB;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* MENU LATERAL */
+
+        .sidebar {
+            width: 250px;
+            min-width: 250px;
+            background: #1F2937;
+            padding: 25px 15px;
+            border-right: 1px solid #374151;
+        }
+
+        .logo {
+            text-align: center;
+            color: #A3E635;
+            font-family: monospace;
+            font-size: 23px;
+            padding: 10px 0 30px;
+            border-bottom: 1px solid #374151;
+            margin-bottom: 25px;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #9CA3AF;
+            margin: 20px 10px 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-item {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 5px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            color: #D1D5DB;
+            text-align: left;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .menu-item:hover {
+            background: #374151;
+            color: #A3E635;
+        }
+
+        .menu-item.active {
+            background: #365314;
+            color: #BEF264;
+            border-left: 3px solid #A3E635;
+        }
+
+        /* ÁREA PRINCIPAL */
+
+        .main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .topbar {
+            min-height: 75px;
+            background: #1F2937;
+            border-bottom: 1px solid #374151;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 30px;
+            gap: 15px;
+        }
+
+        .topbar h2 {
+            font-size: 20px;
+        }
+
+        .user {
+            color: #A3E635;
+            font-size: 13px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .welcome p {
+            color: #9CA3AF;
+            font-size: 14px;
+        }
+
+        /* CARTÕES */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1F2937;
+            border: 1px solid #374151;
+            padding: 22px;
+            border-radius: 10px;
+            min-width: 0;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: #9CA3AF;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            color: #A3E635;
+            overflow-wrap: anywhere;
+        }
+
+        .card small {
+            display: block;
+            color: #9CA3AF;
+            margin-top: 10px;
+        }
+
+        /* PAINÉIS */
+
+        .panel {
+            background: #1F2937;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 22px;
+            min-width: 0;
+        }
+
+        .panel h3 {
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+
+        .panel p {
+            color: #D1D5DB;
+            line-height: 1.7;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        /* TABELAS */
+
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 550px;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #374151;
+            font-size: 13px;
+        }
+
+        th {
+            color: #A3E635;
+            font-weight: normal;
+        }
+
+        td {
+            color: #D1D5DB;
+        }
+
+        /* FORMULÁRIOS */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field label {
+            color: #D1D5DB;
+            font-size: 13px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: #111827;
+            color: #F9FAFB;
+            border: 1px solid #4B5563;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid #A3E635;
+            border-color: #A3E635;
+        }
+
+        .btn {
+            padding: 12px 18px;
+            background: #A3E635;
+            color: #111827;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+
+        .btn:hover {
+            background: #BEF264;
+        }
+
+        .btn-secondary {
+            background: #374151;
+            color: #F9FAFB;
+        }
+
+        .btn-danger {
+            background: #7F1D1D;
+            color: #FEE2E2;
+            padding: 7px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 11px;
+            background: #365314;
+            color: #BEF264;
+        }
+
+        .muted {
+            color: #9CA3AF;
+            font-size: 13px;
+        }
+
+        .empty {
+            color: #9CA3AF;
+            padding: 20px 0;
+        }
+
+        .footer {
+            color: #6B7280;
+            font-size: 12px;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* ADAPTAÇÃO PARA TELAS MENORES */
+
+        @media (max-width: 1100px) {
+            .cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: 0;
+                padding: 15px;
+            }
+
+            .logo {
+                padding-bottom: 15px;
+                margin-bottom: 10px;
+            }
+
+            .menu-list {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 4px;
+            }
+
+            .menu-title {
+                margin-top: 15px;
+            }
+
+            .topbar {
+                padding: 18px;
+            }
+
+            .content {
+                padding: 18px;
+            }
+
+            .section-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards {
+                gap: 10px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .card h3 {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- MENU LATERAL -->
+
+    <aside class="sidebar">
+
+        <div class="logo">CountFinance</div>
+
+        <div class="menu-title">Principal</div>
+
+        <nav class="menu-list">
+
+            <button class="menu-item active"
+                data-page="inicio">⌂ Visão geral</button>
+
+            <button class="menu-item"
+                data-page="associados">♙ Associados</button>
+
+            <button class="menu-item"
+                data-page="contas">▣ Contas a pagar</button>
+
+            <button class="menu-item"
+                data-page="caixa">↔ Fluxo de caixa</button>
+
+            <button class="menu-item"
+                data-page="boletos">▤ Boletos e cobranças</button>
+
+            <button class="menu-item"
+                data-page="notas">▧ Notas fiscais</button>
+
+            <button class="menu-item"
+                data-page="estoque">▦ Estoque</button>
+
+            <button class="menu-item"
+                data-page="almoxarifado">▤ Almoxarifado</button>
+
+            <button class="menu-item"
+                data-page="relatorios">▥ Relatórios</button>
+
+            <button class="menu-item"
+                data-page="funcionarios">♙ Funcionários</button>
+
+            <button class="menu-item"
+                data-page="configuracoes">⚙ Configurações</button>
+
+        </nav>
+
+    </aside>
+
+    <!-- PAINEL AO LADO DO MENU -->
+
+    <main class="main">
+
+        <header class="topbar">
+            <h2 id="page-title">Visão geral</h2>
+            <div class="user">● Assistente financeiro</div>
+        </header>
+
+        <section class="content" id="content">
+
+            <!-- A PRIMEIRA TELA É CARREGADA AQUI -->
+
+        </section>
+
+        <footer class="footer">
+            CountFinance © 2026 — Sistema de gestão financeira
+        </footer>
+
+    </main>
+
+</div>
+
+<script>
+    const content = document.getElementById("content");
+    const pageTitle = document.getElementById("page-title");
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    const pages = {
+
+        inicio: `
+            <div class="welcome">
+                <h1>Bem-vindo ao CountFinance</h1>
+                <p>Seu assistente para organizar e acompanhar a gestão financeira.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <p>Saldo disponível</p>
+                    <h3>R$ 0,00</h3>
+                    <small>Saldo demonstrativo</small>
+                </div>
+
+                <div class="card">
+                    <p>Contas a pagar</p>
+                    <h3>R$ 0,00</h3>
+                    <small>Valores pendentes</small>
+                </div>
+
+                <div class="card">
+                    <p>Contas a receber</p>
+                    <h3>R$ 0,00</h3>
+                    <small>Valores previstos</small>
+                </div>
+
+                <div class="card">
+                    <p>Associados cadastrados</p>
+                    <h3>0</h3>
+                    <small>Cadastros registrados nesta sessão</small>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <div class="panel">
+                    <h3>Atalhos rápidos</h3>
+                    <button class="btn" onclick="showPage('associados')">
+                        Cadastrar associado
+                    </button>
+                    <button class="btn" onclick="showPage('contas')">
+                        Nova conta a pagar
+                    </button>
+                    <button class="btn" onclick="showPage('estoque')">
+                        Consultar estoque
+                    </button>
+                </div>
+
+                <div class="panel">
+                    <h3>Agenda financeira</h3>
+                    <p>Consulte vencimentos, recebimentos e pagamentos nas respectivas áreas do menu.</p>
+                    <p class="muted">Nenhuma movimentação foi registrada ainda.</p>
+                </div>
+            </div>
+        `,
+
+        associados: `
+            <div class="welcome">
+                <h1>Cadastro de associados</h1>
+                <p>Gerencie os dados e acompanhe os registros dos associados.</p>
+            </div>
+
+            <div class="panel">
+                <h3>Novo associado</h3>
+
+                <form id="form-associado">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Nome completo</label>
+                            <input name="nome" required>
+                        </div>
+
+                        <div class="field">
+                            <label>CPF ou CNPJ</label>
+                            <input name="documento" required>
+                        </div>
+
+                        <div class="field">
+                            <label>E-mail</label>
+                            <input name="email" type="email">
+                        </div>
+
+                        <div class="field">
+                            <label>Telefone</label>
+                            <input name="telefone">
+                        </div>
+
+                        <div class="field">
+                            <label>Data de cadastro</label>
+                            <input name="data" type="date" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Situação</label>
+                            <select name="situacao">
+                                <option>Ativo</option>
+                                <option>Inativo</option>
+                                <option>Pendente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn" type="submit">
+                        Cadastrar associado
+                    </button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Associados registrados</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Documento</th>
+                                <th>E-mail</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-associados">
+                            <tr><td colspan="4">Nenhum associado cadastrado.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        tesouraria: `
+            <div class="welcome">
+                <h1>Tesouraria</h1>
+                <p>Controle recebimentos, pagamentos e movimentações financeiras.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card"><p>Recebimentos registrados</p><h3>R$ 0,00</h3></div>
+                <div class="card"><p>Pagamentos registrados</p><h3>R$ 0,00</h3></div>
+            </div>
+
+            <div class="panel">
+                <h3>Registrar movimentação</h3>
+                <form id="form-tesouraria">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Descrição</label>
+                            <input name="descricao" required>
+                        </div>
+                        <div class="field">
+                            <label>Tipo de movimentação</label>
+                            <select name="tipo">
+                                <option>Recebimento</option>
+                                <option>Pagamento</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Valor (R$)</label>
+                            <input name="valor" type="number" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="field">
+                            <label>Data</label>
+                            <input name="data" type="date" required>
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Registrar movimentação</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Movimentações recentes</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Descrição</th><th>Tipo</th><th>Valor</th><th>Data</th></tr></thead>
+                        <tbody id="lista-tesouraria">
+                            <tr><td colspan="4">Nenhuma movimentação registrada.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        contas: `
+            <div class="welcome">
+                <h1>Contas a pagar</h1>
+                <p>Organize despesas, fornecedores e datas de vencimento.</p>
+            </div>
+
+            <div class="panel">
+                <h3>Registrar conta</h3>
+                <form id="form-conta">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Descrição da despesa</label>
+                            <input name="descricao" required>
+                        </div>
+                        <div class="field">
+                            <label>Fornecedor</label>
+                            <input name="fornecedor">
+                        </div>
+                        <div class="field">
+                            <label>Valor (R$)</label>
+                            <input name="valor" type="number" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="field">
+                            <label>Vencimento</label>
+                            <input name="vencimento" type="date" required>
+                        </div>
+                        <div class="field">
+                            <label>Pagamento</label>
+                            <input name="pagamento" type="date">
+                        </div>
+                        <div class="field">
+                            <label>Situação</label>
+                            <select name="situacao">
+                                <option>Pendente</option>
+                                <option>Pago</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Salvar conta</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Contas registradas</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Descrição</th><th>Valor</th><th>Vencimento</th><th>Pagamento</th><th>Situação</th></tr></thead>
+                        <tbody id="lista-contas">
+                            <tr><td colspan="5">Nenhuma conta registrada.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        caixa: `
+            <div class="welcome">
+                <h1>Fluxo de caixa</h1>
+                <p>Acompanhe entradas, saídas e saldo das movimentações registradas na tesouraria.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card"><p>Total de entradas</p><h3 id="caixa-entradas">R$ 0,00</h3></div>
+                <div class="card"><p>Total de saídas</p><h3 id="caixa-saidas">R$ 0,00</h3></div>
+                <div class="card"><p>Saldo das movimentações</p><h3 id="caixa-saldo">R$ 0,00</h3></div>
+            </div>
+
+            <div class="panel">
+                <h3>Movimentações da tesouraria</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Descrição</th><th>Tipo</th><th>Valor</th><th>Data</th></tr></thead>
+                        <tbody id="lista-caixa"></tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        boletos: `
+            <div class="welcome">
+                <h1>Boletos e cobranças</h1>
+                <p>Controle cobranças, vencimentos e pagamentos dos associados.</p>
+            </div>
+
+            <div class="panel">
+                <h3>Registrar boleto</h3>
+                <form id="form-boleto">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Associado ou pagador</label>
+                            <input name="pagador" required>
+                        </div>
+                        <div class="field">
+                            <label>Nosso número ou referência</label>
+                            <input name="referencia">
+                        </div>
+                        <div class="field">
+                            <label>Valor (R$)</label>
+                            <input name="valor" type="number" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="field">
+                            <label>Vencimento</label>
+                            <input name="vencimento" type="date" required>
+                        </div>
+                        <div class="field">
+                            <label>Situação</label>
+                            <select name="situacao">
+                                <option>Pendente</option>
+                                <option>Pago</option>
+                                <option>Vencido</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Salvar boleto</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Controle de cobranças</h3>
+                <p class="muted">O envio automático de cobranças exige integração com um serviço de e-mail, banco ou API de boletos.</p>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Pagador</th><th>Referência</th><th>Valor</th><th>Vencimento</th><th>Situação</th></tr></thead>
+                        <tbody id="lista-boletos">
+                            <tr><td colspan="5">Nenhum boleto registrado.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        notas: `
+            <div class="welcome">
+                <h1>Notas fiscais</h1>
+                <p>Controle documentos fiscais, valores e datas de emissão e vencimento.</p>
+            </div>
+
+            <div class="panel">
+                <h3>Registrar nota fiscal</h3>
+                <form id="form-nota">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Número da nota</label>
+                            <input name="numero" required>
+                        </div>
+                        <div class="field">
+                            <label>Fornecedor ou emissor</label>
+                            <input name="fornecedor" required>
+                        </div>
+                        <div class="field">
+                            <label>Valor (R$)</label>
+                            <input name="valor" type="number" min="0.01" step="0.01" required>
+                        </div>
+                        <div class="field">
+                            <label>Emissão</label>
+                            <input name="emissao" type="date" required>
+                        </div>
+                        <div class="field">
+                            <label>Vencimento</label>
+                            <input name="vencimento" type="date">
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Salvar nota fiscal</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Notas cadastradas</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Número</th><th>Fornecedor</th><th>Valor</th><th>Emissão</th><th>Vencimento</th></tr></thead>
+                        <tbody id="lista-notas">
+                            <tr><td colspan="5">Nenhuma nota cadastrada.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        estoque: `
+            <div class="welcome">
+                <h1>Controle de estoque</h1>
+                <p>Gerencie produtos, quantidades disponíveis e níveis mínimos.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <p>Produtos cadastrados</p>
+                    <h3 id="total-produtos">0</h3>
+                </div>
+                <div class="card">
+                    <p>Unidades em estoque</p>
+                    <h3 id="total-unidades">0</h3>
+                </div>
+                <div class="card">
+                    <p>Produtos com estoque baixo</p>
+                    <h3 id="estoque-baixo">0</h3>
+                </div>
+                <div class="card">
+                    <p>Valor estimado do estoque</p>
+                    <h3 id="valor-estoque">R$ 0,00</h3>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Cadastrar produto</h3>
+                <form id="form-produto">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Nome do produto</label>
+                            <input name="nome" required>
+                        </div>
+                        <div class="field">
+                            <label>Código ou SKU</label>
+                            <input name="codigo" required>
+                        </div>
+                        <div class="field">
+                            <label>Quantidade inicial</label>
+                            <input name="quantidade" type="number" min="0" step="1" required>
+                        </div>
+                        <div class="field">
+                            <label>Estoque mínimo</label>
+                            <input name="minimo" type="number" min="0" step="1" required>
+                        </div>
+                        <div class="field">
+                            <label>Preço unitário (R$)</label>
+                            <input name="preco" type="number" min="0" step="0.01" required>
+                        </div>
+                        <div class="field">
+                            <label>Categoria</label>
+                            <input name="categoria" placeholder="Ex.: Material de escritório">
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Adicionar produto</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Produtos em estoque</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Código</th>
+                                <th>Categoria</th>
+                                <th>Quantidade</th>
+                                <th>Preço unitário</th>
+                                <th>Situação</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-produtos">
+                            <tr><td colspan="7">Nenhum produto cadastrado.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        almoxarifado: `
+            <div class="welcome">
+                <h1>Almoxarifado</h1>
+                <p>Controle entradas, retiradas e distribuição de materiais.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <p>Movimentações registradas</p>
+                    <h3 id="total-movimentacoes">0</h3>
+                </div>
+                <div class="card">
+                    <p>Entradas</p>
+                    <h3 id="total-entradas">0</h3>
+                </div>
+                <div class="card">
+                    <p>Saídas</p>
+                    <h3 id="total-saidas">0</h3>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Registrar movimentação de material</h3>
+                <form id="form-almoxarifado">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Produto</label>
+                            <select name="produto" id="produto-almoxarifado" required>
+                                <option value="">Cadastre ou selecione um produto</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Tipo de movimentação</label>
+                            <select name="tipo" required>
+                                <option value="Entrada">Entrada</option>
+                                <option value="Saída">Saída</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Quantidade</label>
+                            <input name="quantidade" type="number" min="1" step="1" required>
+                        </div>
+                        <div class="field">
+                            <label>Responsável</label>
+                            <input name="responsavel" required>
+                        </div>
+                        <div class="field">
+                            <label>Setor ou destino</label>
+                            <input name="destino" placeholder="Ex.: Departamento administrativo">
+                        </div>
+                        <div class="field">
+                            <label>Data da movimentação</label>
+                            <input name="data" type="date" required>
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Registrar movimentação</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <h3>Histórico de movimentações</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Responsável</th>
+                                <th>Destino</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-almoxarifado">
+                            <tr><td colspan="6">Nenhuma movimentação registrada.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        relatorios: `
+            <div class="welcome">
+                <h1>Relatórios</h1>
+                <p>Consulte os dados registrados nas áreas do sistema.</p>
+            </div>
+            <div class="section-grid">
+                <div class="panel">
+                    <h3>Relatórios financeiros</h3>
+                    <p>• Fluxo de caixa</p>
+                    <p>• Contas a pagar</p>
+                    <p>• Recebimentos da tesouraria</p>
+                    <p>• Boletos e cobranças</p>
+                </div>
+                <div class="panel">
+                    <h3>Relatórios operacionais</h3>
+                    <p>• Cadastro de associados</p>
+                    <p>• Posição do estoque</p>
+                    <p>• Movimentações do almoxarifado</p>
+                    <p>• Cadastro de funcionários</p>
+                </div>
+            </div>
+            <div class="panel">
+                <h3>Exportação</h3>
+                <p>Os dados demonstrativos desta versão ainda não possuem exportação para Excel ou PDF.</p>
+            </div>
+        `,
+
+        funcionarios: `
+            <div class="welcome">
+                <h1>Funcionários e funções</h1>
+                <p>Organize a equipe, os cargos e as responsabilidades.</p>
+            </div>
+            <div class="panel">
+                <h3>Cadastrar funcionário</h3>
+                <form id="form-funcionario">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label>Nome completo</label>
+                            <input name="nome" required>
+                        </div>
+                        <div class="field">
+                            <label>Cargo</label>
+                            <select name="cargo">
+                                <option>Assistente financeiro</option>
+                                <option>Tesoureiro</option>
+                                <option>Contador</option>
+                                <option>Auxiliar administrativo</option>
+                                <option>Almoxarife</option>
+                                <option>Gerente</option>
+                                <option>Atendimento aos associados</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Departamento</label>
+                            <input name="departamento" required>
+                        </div>
+                        <div class="field">
+                            <label>E-mail profissional</label>
+                            <input name="email" type="email">
+                        </div>
+                    </div>
+                    <button class="btn" type="submit">Cadastrar funcionário</button>
+                </form>
+            </div>
+            <div class="panel">
+                <h3>Equipe cadastrada</h3>
+                <div class="table-wrap">
+                    <table>
+                        <thead><tr><th>Nome</th><th>Cargo</th><th>Departamento</th><th>E-mail</th></tr></thead>
+                        <tbody id="lista-funcionarios">
+                            <tr><td colspan="4">Nenhum funcionário cadastrado.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `,
+
+        configuracoes: `
+            <div class="welcome">
+                <h1>Configurações</h1>
+                <p>Preferências e informações gerais do CountFinance.</p>
+            </div>
+            <div class="panel">
+                <h3>Identificação do sistema</h3>
+                <p><strong>Nome:</strong> CountFinance</p>
+                <p><strong>Finalidade:</strong> Gestão financeira e administrativa</p>
+                <p><strong>Interface:</strong> Fundo escuro, verde-limão e tons de cinza</p>
+            </div>
+            <div class="panel">
+                <h3>Próximas integrações</h3>
+                <p>• Banco de dados MySQL</p>
+                <p>• Autenticação de usuários e permissões</p>
+                <p>• Envio de e-mails de cobrança</p>
+                <p>• Integração bancária e emissão de boletos</p>
+                <p>• Cópias de segurança</p>
+            </div>
+        `
+    };
+
+    // DADOS DA DEMONSTRAÇÃO
+
+    const associados = [];
+    const produtos = [];
+    const movimentacoes = [];
+    const contas = [];
+    const boletos = [];
+    const notas = [];
+    const tesouraria = [];
+    const funcionarios = [];
+
+    function dinheiro(valor) {
+        return Number(valor).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
+    function escapar(valor) {
+        return String(valor ?? "").replace(/[&<>"']/g, caractere => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[caractere]);
+    }
+
+    function linhaVazia(colunas, mensagem) {
+        return `<tr><td colspan="${colunas}">${mensagem}</td></tr>`;
+    }
+
+    function showPage(page) {
+        if (!pages[page]) return;
+
+        content.innerHTML = pages[page];
+
+        const item = document.querySelector(
+            `.menu-item[data-page="${page}"]`
+        );
+
+        pageTitle.textContent = item
+            ? item.textContent.replace(/^[^\p{L}\p{N}]+\s*/u, "")
+            : "CountFinance";
+
+        menuItems.forEach(botao => {
+            botao.classList.toggle(
+                "active",
+                botao.dataset.page === page
+            );
+        });
+
+        // Atualiza tabelas ao abrir suas respectivas telas.
+        if (page === "estoque") atualizarEstoque();
+        if (page === "almoxarifado") atualizarAlmoxarifado();
+        if (page === "caixa") atualizarCaixa();
+        if (page === "associados") atualizarAssociados();
+        if (page === "contas") atualizarContas();
+        if (page === "boletos") atualizarBoletos();
+        if (page === "notas") atualizarNotas();
+        if (page === "tesouraria") atualizarTesouraria();
+        if (page === "funcionarios") atualizarFuncionarios();
+    }
+
+    menuItems.forEach(botao => {
+        botao.addEventListener("click", () => {
+            showPage(botao.dataset.page);
+        });
+    });
+
+    // ASSOCIADOS
+
+    function atualizarAssociados() {
+        const tbody = document.getElementById("lista-associados");
+        if (!tbody) return;
+
+        tbody.innerHTML = associados.length
+            ? associados.map(a => `
+                <tr>
+                    <td>${escapar(a.nome)}</td>
+                    <td>${escapar(a.documento)}</td>
+                    <td>${escapar(a.email || "—")}</td>
+                    <td>${escapar(a.situacao)}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(4, "Nenhum associado cadastrado.");
+    }
+
+    // ESTOQUE
+
+    function atualizarEstoque() {
+        const tbody = document.getElementById("lista-produtos");
+        if (!tbody) return;
+
+        document.getElementById("total-produtos").textContent =
+            produtos.length;
+
+        document.getElementById("total-unidades").textContent =
+            produtos.reduce((soma, p) => soma + p.quantidade, 0);
+
+        document.getElementById("estoque-baixo").textContent =
+            produtos.filter(p => p.quantidade <= p.minimo).length;
+
+        document.getElementById("valor-estoque").textContent =
+            dinheiro(produtos.reduce(
+                (soma, p) => soma + p.quantidade * p.preco, 0
+            ));
+
+        tbody.innerHTML = produtos.length
+            ? produtos.map((p, i) => `
+                <tr>
+                    <td>${escapar(p.nome)}</td>
+                    <td>${escapar(p.codigo)}</td>
+                    <td>${escapar(p.categoria || "—")}</td>
+                    <td>${p.quantidade}</td>
+                    <td>${dinheiro(p.preco)}</td>
+                    <td>${p.quantidade <= p.minimo
+                        ? '<span class="tag">Estoque baixo</span>'
+                        : '<span class="tag">Disponível</span>'}</td>
+                    <td>
+                        <button class="btn-secondary btn"
+                            onclick="ajustarEstoque(${i}, 1)">+ Entrada</button>
+                        <button class="btn-danger"
+                            onclick="ajustarEstoque(${i}, -1)">- Saída</button>
+                    </td>
+                </tr>
+            `).join("")
+            : linhaVazia(7, "Nenhum produto cadastrado.");
+
+        const select = document.getElementById("produto-almoxarifado");
+
+        if (select) {
+            const anterior = select.value;
+
+            select.innerHTML =
+                '<option value="">Selecione um produto</option>' +
+                produtos.map((p, i) =>
+                    `<option value="${i}">${escapar(p.nome)} (${p.quantidade} disponíveis)</option>`
+                ).join("");
+
+            if (anterior !== "" && produtos[Number(anterior)]) {
+                select.value = anterior;
+            }
+        }
+    }
+
+    function ajustarEstoque(indice, fator) {
+        const p = produtos[indice];
+        if (!p) return;
+
+        const acao = fator > 0 ? "entrada" : "saída";
+        const valor = prompt(`Qual a quantidade da ${acao} para ${p.nome}?`);
+
+        if (valor === null || valor.trim() === "") return;
+
+        const quantidade = Number(valor);
+
+        if (!Number.isInteger(quantidade) || quantidade <= 0) {
+            alert("Digite uma quantidade inteira maior que zero.");
+            return;
+        }
+
+        if (fator < 0 && quantidade > p.quantidade) {
+            alert("Não há quantidade suficiente no estoque.");
+            return;
+        }
+
+        p.quantidade += fator * quantidade;
+
+        movimentacoes.push({
+            produto: p.nome,
+            tipo: fator > 0 ? "Entrada" : "Saída",
+            quantidade,
+            responsavel: "Ajuste manual",
+            destino: "Estoque",
+            data: new Date().toISOString().slice(0, 10)
+        });
+
+        atualizarEstoque();
+    }
+
+    // ALMOXARIFADO
+
+    function atualizarAlmoxarifado() {
+        const tbody = document.getElementById("lista-almoxarifado");
+        if (!tbody) return;
+
+        document.getElementById("total-movimentacoes").textContent =
+            movimentacoes.length;
+
+        document.getElementById("total-entradas").textContent =
+            movimentacoes.filter(m => m.tipo === "Entrada").length;
+
+        document.getElementById("total-saidas").textContent =
+            movimentacoes.filter(m => m.tipo === "Saída").length;
+
+        tbody.innerHTML = movimentacoes.length
+            ? movimentacoes.map(m => `
+                <tr>
+                    <td>${escapar(m.produto)}</td>
+                    <td>${escapar(m.tipo)}</td>
+                    <td>${m.quantidade}</td>
+                    <td>${escapar(m.responsavel)}</td>
+                    <td>${escapar(m.destino || "—")}</td>
+                    <td>${escapar(m.data)}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(6, "Nenhuma movimentação registrada.");
+    }
+
+    // FLUXO DE CAIXA
+
+    function atualizarCaixa() {
+        const tbody = document.getElementById("lista-caixa");
+        if (!tbody) return;
+
+        const entradas = tesouraria
+            .filter(m => m.tipo === "Recebimento")
+            .reduce((soma, m) => soma + m.valor, 0);
+
+        const saidas = tesouraria
+            .filter(m => m.tipo === "Pagamento")
+            .reduce((soma, m) => soma + m.valor, 0);
+
+        document.getElementById("caixa-entradas").textContent =
+            dinheiro(entradas);
+
+        document.getElementById("caixa-saidas").textContent =
+            dinheiro(saidas);
+
+        document.getElementById("caixa-saldo").textContent =
+            dinheiro(entradas - saidas);
+
+        tbody.innerHTML = tesouraria.length
+            ? tesouraria.map(m => `
+                <tr>
+                    <td>${escapar(m.descricao)}</td>
+                    <td>${escapar(m.tipo)}</td>
+                    <td>${dinheiro(m.valor)}</td>
+                    <td>${escapar(m.data)}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(4, "Nenhuma movimentação registrada.");
+    }
+
+    // CONTAS A PAGAR
+
+    function atualizarContas() {
+        const tbody = document.getElementById("lista-contas");
+        if (!tbody) return;
+
+        tbody.innerHTML = contas.length
+            ? contas.map(c => `
+                <tr>
+                    <td>${escapar(c.descricao)}</td>
+                    <td>${dinheiro(c.valor)}</td>
+                    <td>${escapar(c.vencimento)}</td>
+                    <td>${escapar(c.pagamento || "—")}</td>
+                    <td>${escapar(c.situacao)}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(5, "Nenhuma conta registrada.");
+    }
+
+    // BOLETOS
+
+    function atualizarBoletos() {
+        const tbody = document.getElementById("lista-boletos");
+        if (!tbody) return;
+
+        tbody.innerHTML = boletos.length
+            ? boletos.map(b => `
+                <tr>
+                    <td>${escapar(b.pagador)}</td>
+                    <td>${escapar(b.referencia || "—")}</td>
+                    <td>${dinheiro(b.valor)}</td>
+                    <td>${escapar(b.vencimento)}</td>
+                    <td>${escapar(b.situacao)}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(5, "Nenhum boleto registrado.");
+    }
+
+    // NOTAS FISCAIS
+
+    function atualizarNotas() {
+        const tbody = document.getElementById("lista-notas");
+        if (!tbody) return;
+
+        tbody.innerHTML = notas.length
+            ? notas.map(n => `
+                <tr>
+                    <td>${escapar(n.numero)}</td>
+                    <td>${escapar(n.fornecedor)}</td>
+                    <td>${dinheiro(n.valor)}</td>
+                    <td>${escapar(n.emissao)}</td>
+                    <td>${escapar(n.vencimento || "—")}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(5, "Nenhuma nota cadastrada.");
+    }
+
+    // TESOURARIA
+
+    function atualizarTesouraria() {
+        const tbody = document.getElementById("lista-tesouraria");
+        if (!tbody) return;
+
+        tbody.innerHTML = tesouraria.length
+            ? tesouraria.map(m => `
+                <tr>
+                    <td>${escapar(m.descricao)}</td>
+                    <td>${escapar(m.tipo)}</td>
+                    <td>${dinheiro(m.valor)}</td>
+                    <td>${escapar(m.data)}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(4, "Nenhuma movimentação registrada.");
+    }
+
+    // FUNCIONÁRIOS
+
+    function atualizarFuncionarios() {
+        const tbody = document.getElementById("lista-funcionarios");
+        if (!tbody) return;
+
+        tbody.innerHTML = funcionarios.length
+            ? funcionarios.map(f => `
+                <tr>
+                    <td>${escapar(f.nome)}</td>
+                    <td>${escapar(f.cargo)}</td>
+                    <td>${escapar(f.departamento)}</td>
+                    <td>${escapar(f.email || "—")}</td>
+                </tr>
+            `).join("")
+            : linhaVazia(4, "Nenhum funcionário cadastrado.");
+    }
+
+    // ENVIO DOS FORMULÁRIOS
+
+    content.addEventListener("submit", function(event) {
+        const form = event.target;
+        if (!form.id.startsWith("form-")) return;
+
+        event.preventDefault();
+
+        const dados = Object.fromEntries(new FormData(form).entries());
+
+        if (form.id === "form-associado") {
+            associados.push(dados);
+            atualizarAssociados();
+            form.reset();
+            alert("Associado cadastrado nesta sessão!");
+        }
+
+        if (form.id === "form-produto") {
+            if (produtos.some(p => p.codigo === dados.codigo)) {
+                alert("Já existe um produto com esse código.");
+                return;
+            }
+
+            produtos.push({
+                ...dados,
+                quantidade: Number(dados.quantidade),
+                minimo: Number(dados.minimo),
+                preco: Number(dados.preco)
+            });
+
+            atualizarEstoque();
+            form.reset();
+            alert("Produto cadastrado nesta sessão!");
+        }
+
+        if (form.id === "form-almoxarifado") {
+            const indice = Number(dados.produto);
+            const p = produtos[indice];
+            const quantidade = Number(dados.quantidade);
+
+            if (!p || !Number.isInteger(quantidade) || quantidade <= 0) {
+                alert("Selecione um produto e informe uma quantidade válida.");
+                return;
+            }
+
+            if (dados.tipo === "Saída" && quantidade > p.quantidade) {
+                alert("Quantidade indisponível no estoque.");
+                return;
+            }
+
+            p.quantidade += dados.tipo === "Entrada"
+                ? quantidade
+                : -quantidade;
+
+            movimentacoes.push({
+                ...dados,
+                produto: p.nome,
+                quantidade
+            });
+
+            atualizarAlmoxarifado();
+            atualizarEstoque();
+            form.reset();
+            alert("Movimentação registrada nesta sessão!");
+        }
+
+        if (form.id === "form-tesouraria") {
+            tesouraria.push({
+                ...dados,
+                valor: Number(dados.valor)
+            });
+            atualizarTesouraria();
+            form.reset();
+            alert("Movimentação registrada nesta sessão!");
+        }
+
+        if (form.id === "form-conta") {
+            contas.push(dados);
+            atualizarContas();
+            form.reset();
+            alert("Conta registrada nesta sessão!");
+        }
+
+        if (form.id === "form-boleto") {
+            boletos.push(dados);
+            atualizarBoletos();
+            form.reset();
+            alert("Boleto registrado nesta sessão!");
+        }
+
+        if (form.id === "form-nota") {
+            notas.push(dados);
+            atualizarNotas();
+            form.reset();
+            alert("Nota fiscal registrada nesta sessão!");
+        }
+
+        if (form.id === "form-funcionario") {
+            funcionarios.push(dados);
+            atualizarFuncionarios();
+            form.reset();
+            alert("Funcionário cadastrado nesta sessão!");
+        }
+    });
+
+    // ABRE A PRIMEIRA TELA
+
+    showPage("inicio");
+</script>
+
+</body>
+</html>
