@@ -1,0 +1,201 @@
+<!DOCTYPE html> <!----Esta linha avisa ao
+navegador do computador que o seu documento
+segue o padrão moderno do HTML5, evitando
+que a página seja interpretada de forma errada.---->
+<html lang="pt-BR"> <!---Esta tag abre a
+grande caixa que guardará todo o conteúdo do
+seu site. O atributo lang="pt-BR" avisa aos
+mecanismos de busca (como o Google) que o seu
+texto está em português do Brasil---->
+<head> <!---abre a
+seção de metadados da página, ou seja, os
+bastidores invisíveis onde colocamos regras e
+configurações técnicas para os navegadores.---->
+<meta charset="utf-8"> <!---Esse comando
+configura o padrão de caracteres UTF-8. Ele
+garante que acentos (como á, é, ô) e símbolos
+apareçam corretamente na tela sem virarem
+códigos estranhos.---->
+<title>Meu primeiro site</title> <!---A tag <title>
+define o título que aparece escrito na aba lá no
+topo do navegador, funcionando como a etiqueta
+de identificação da sua página.--->
+</head> <!--O fecho </head>
+sinaliza ao navegador que todas as instruções
+técnicas terminaram e que o conteúdo visual
+começará a partir daqui.--->
+<body> <!--A tag <body> abre
+o "corpo" do site. É o palco principal onde tudo o
+que o seu visitante de fato enxerga (textos,
+títulos, imagens) deve ser posicionado.--->
+<h1>Bem ao meu site!</h1>
+<p>Este é o meu primeiro site em html</p>
+</body>
+</html>
+<!--Com este bloco, você cria um título principal de maior importância da página (<h1>), adiciona ao parágrafo de texto comum (<p>) para as descrições e, logo em seguida, usa os marcadores </body> e </html> para avisar ao navegador qeu o conteúdo visual e o arquivo de internet foram ecerrados de forma definitiva.-->
+
+
+
+/* Exemplo de herarquia */
+
+<body>
+    <h1>O Meu Primeiro Site Estruturado</h1>
+    
+    <h2>Introdução</h2> / <h2>Experiência</h2>
+
+    <h3>Projetos de HTML</h3>
+</body>
+
+<!--Não use títulos apenas pelo tamanho: o tamanho da fonte pode ser alterado com CSS. Use o título correto (exemplo: <h2>) porque ele é semanticamente uma seção, e mão por que você quer a fonte daquele tamanho.---> 
+    <!------------------------------------------>
+
+    /* Parágrafo (Paragrafo) - <p> */
+
+    <!--O elemento <p> é o seu bloco de texto básico. Ele define um parágrafo completo.-->
+
+        <!--Não use <br> para criar parágrafos: É um erro comum usar a tag <br> (quebra de linha) repetidas vezes para simular o espaçamento de um parágrafo. Isso é incorreto e prejudica a semântica, então sempre use <p> para um novo parágrafo.--->
+    <!------------------------------------------>
+
+
+        /* Quebra de Linha (Break) - <br> */
+ 
+         <!--O <br> (line break) é usado para forçar uma quebra de linha em um bloco de texto existente(como um <p>). -->
+
+        <!--Uso Ideal: enedereços, poemas ou onde a quebra de linha é parte intrínseca do conteúdo.--->
+
+        <p>
+            Meu Endereço:<br>
+            Rua da Programção, 123<br>
+            Cidade Web, Estado HTML
+        </p>
+    <!------------------------------------------>
+
+        /* Linha Horizontal (Horizontal Rule) - <hr> */
+
+        <!--O <hr> (Horizontal Rulee) cria uma linha divisória temática na página.-->
+
+        <!--Uso Ideal: para separar visualmente grandes seções de conteúdo onde a mudança de tema é acentuada.--->
+
+        <h2>Seção 1: Introdução</h2>
+        <p>Texto da primeira seção..</p>
+
+        <hr> <h2>Seçao 2: Conclusão</h2>
+        <p>Texto da seguonda seção...</p>
+
+    <!------------------------------------------>
+
+    /* Ênfase Importante (Strong) - <strong> */
+
+        <!--O <strong> é usado para indicar que uma parte do texto tem grande importância, seriedade ou urgência.-->
+
+            <!--Visual Padrão: o texto é geralmente exibido em negrito.-->
+            <!--Semântica: não serve apenas para negritar; avisa ao navegador, leitores de tela e robôs de busca que aquela inoformação é vital.-->
+
+    <!------------------------------------------>
+
+    /* Ênfase (Emphasis) - <em> */
+
+        <!--O <em> é usado para indicar uma ênfase tornal ou um desvio de pronúncia.-->
+        <!--Visual Padrão: o texto é geralmente exibido em itálico.-->
+        <!--Semântica: sinaliza qeu aquela parte da frase deve ser lida com mais ênfase (como se você estivesse falando mais alto.)-->
+
+    <!------------------------------------------>
+
+    /* Listas não ordenadas - <ul> */
+
+        <!--onde os itens são apresentados com marcadores ao invés de números. Cada item da lista é definido pela tag <li>.-->
+        
+    <!------------------------------------------>
+
+    /* Representar itens em listas - <li> */
+
+        <!--Ela deve estar contida dentro de elementos como <ul> (lista não ordenada), <ol> (lista ordenada) ou <menu>.-->
+        <!--Em listas não ordenadas, os itens são exibidos com marcadores (bolinhas), enquanto em listas ordenadas, são numerados ou exibidos com letras.-->
+    
+        Lista não ordenadas:
+    <ol>
+        <li>Café</li>
+        <li>Chá</li>
+        <li>Leite</li>
+    </ol>
+
+        Lista não ordenadas:
+        <ul>
+            <li>Café</li>
+            <li>Chá</li>
+            <li>Leite</li>
+        </ul>
+
+    <!------------------------------------------>
+
+    /* Conteúdo Independente e autossuficiente - <article> */
+
+        <!--Ele é utilizado para estruturar o conteúdo de forma semântica, permitindo que o conteúdo seja lido e entendido independentemente do contexto em que está inserido.-->
+        
+    <!------------------------------------------>
+
+    /* A Tag <form>: */
+        <!--Você deve envolver todos os seus campos de entrada de dados dentro desta tag.-->
+
+        <form>
+            <!--Todos os campos de input, botões, e labels vão aqui dentro-->
+        </form>
+
+    <!------------------------------------------>
+
+       /* Atributos do <form> */
+
+        /* action */
+            <!--Define o URL (destino) para onde os dados do formulário serão enviados quando botão de submisão for clicado.-->
+
+        <!--Exemplo: action="/enviar-dados;php"-->
+
+        /* method */
+            <!--define o URL (destino) para onde os dados do formulário serão enviados quando o botão de submissão for clicado-->
+
+        /* GET (Padrão) */
+            <!--os dados do formulário são adiconados ao URL. Usado para buscas ou quando não são sensísveis.-->
+
+        /* POST */  
+            <!--os dados são enviados no corpo da requisição HTTP (invísivel na URL). Usado para informaçõe HTTP (senhas, email, cadastro)-->
+
+        <!--Exemplo-->
+            <form action="/cadastro" method="POST">
+
+    <!------------------------------------------>
+
+     /* Campos de Entrada de Dados - <input> */
+        <!--O elemento <input> é a esrela de qualquer formulário. Ele é um Elemento Vazio (não tem tag de fechamento) e sua função é totalmente definida pelo atributo type.-->
+
+        <!--O valor do atributo type muda o comportamento e a aparência do campo: -->
+
+       - text: O padrão. Campo simples para texto de linha única. (Nome completo, assunto)
+
+       - email: Garante que o texto digitado seja formatado como um e-mail. (Endereços de e-mail.)
+
+       - password: Oculta os caracteres digitais mostrando bolinhas ou asteríscos. (Senhas.)
+
+       - number: Aceita apenas números e pode exibir setas para aumentar/diminiur. (idade, quantidade de produtos.)
+
+       - checkbox: Permite marcar zero, uma ou mais opções. (Aceita os termos de uso.)
+
+       - radio: Permite marcar apenas uma opção dentro de um grupo. (Escolha de gênero masculino, feminino e outro.)
+
+       - submit: Cria um botão que, ao ser clicado, envia o fomrulário. (Botão "Enviar" ou "Cadastro".)
+
+       - file: Abre a caixa de diálogo do sistema para que o usúario selecione um arquivo.
+       (Upload de foto.)
+
+    /* Rótulos e Acessiblidade - <label> */
+
+    <!--Define um rótulo (texto explicativo)para um campo de formulário. Ele é essencial para a acessibilidade, pois permite que o usuário clique no texto do rótulo para ativar o campo.-->
+
+        /* Ligando <label> e <input> (Regra de Ouro) */
+            <!--O <label> deve ser conectado ao de forma explícita por dois atributos qeu devem ser idênticos>: -->
+            <!--<input> precisa do atributo id: O id (identificador único) é como o CPF do seu campo.--> 
+            <!--<label>> precisa do atributo for: o For aponta para o id do campo ao qual ele está ligado.-->
+
+                <label for="nomeUsuário">Nome Completo:</label>
+                <input type="text" id="nomeUsuário" name="nome">
+
+        /*  Área de Texto
